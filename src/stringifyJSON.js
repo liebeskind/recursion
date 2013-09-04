@@ -11,6 +11,8 @@ function stringifyJSON(obj) {
 					if (typeof obj[prop] != 'function'){
 						if (!isNaN(prop)){
 							holder.push(stringifyJSON(obj[prop])); 
+						} else if (prop === "undefined"){
+							return "{}";
 						} else {
 							holder.push('"'+ prop + '":' + stringifyJSON(obj[prop]));
 						}
