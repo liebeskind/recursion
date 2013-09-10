@@ -9,8 +9,10 @@ var getElementsByClassName = function (className) {
 	var childNodes = document.body.childNodes;
 
 	for (var i = 0; i< childNodes.length; i++){
-		if (childNodes[i].class === classname){
-			results.push(childNodes[i]);
+		if (childNodes[i].nodeType === 1){
+			if (childNodes[i].classList === className){
+				results.push(childNodes[i]);
+			}
 		}
 	}
 	return results;
