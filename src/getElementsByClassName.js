@@ -10,7 +10,7 @@ var getElementsByClassName = function (className) {
 
 	for (var i = 0; i< childNodes.length; i++){
 		if (childNodes[i].nodeType === 1){
-			if (childNodes[i].classList === className){
+			if (childNodes[i].classList.contains(className)){
 				results.push(childNodes[i]);
 			}
 		}
