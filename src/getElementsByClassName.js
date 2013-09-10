@@ -6,20 +6,25 @@
 // But in stead we're going to implement it from scratch:
 var getElementsByClassName = function (className) {
 	var results = [];
-	var firstNode = document.body.childNodes[0];
+	var startingNode = document.body.children[0];
+	var arr = Array.prototype.slice.call(startingNode)
 
 	var workHorse = function(node){
-		if (node.nodeType === 1){
-			var nodeClass = node.classList;
-			if (nodeClass.contains(className)){
-				results.push(node);
-			}
-		}
 		while (node){
-		workHorse(node.nextSibling)
+			if (node && node.nodeType === 1){
+				var counter = node.classList;
+				if (counter){
+					if (counter == className){
+						results.push(node);
+						break;						
+					}
+				}
+			}
+			node = node.nextSibling;
+			workHorse(node)			
 		}
+		alert(results);
 		return results;
 	}
-
-	workHorse(firstNode);
+	workHorse(startingNode)
 };
