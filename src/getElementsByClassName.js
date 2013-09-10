@@ -8,12 +8,18 @@ var getElementsByClassName = function (className) {
 	var results = [];
 	var childNodes = document.body.childNodes;
 
-	for (var i = 0; i< childNodes.length; i++){
-		if (childNodes[i].nodeType === 1){
-			if (childNodes[i].classList.contains(className)){
-				results.push(childNodes[i]);
+	if (arguments){
+	var args = Array.prototype.slice.call(arguments);
+	var thisName = args.pop();
+	args = args.join(' ')
+		for (var i = 0; i< childNodes.length; i++){
+			if (childNodes[i] && childNodes[i].nodeType === 1){
+				if (childNodes[i].classList.contains(thisName)){
+					results.push(childNodes[i]);
+				}
 			}
 		}
+		getElementsByClassName(args)
 	}
 	return results;
 };
