@@ -5,5 +5,15 @@
 
 // But in stead we're going to implement it from scratch:
 var getElementsByClassName = function (className) {
-  // your code here
+	var results = [];
+	var childNodes = document.body.childNodes;
+
+	for (var i = 0; i< childNodes.length; i++){
+		if (childNodes[i].class === classname){
+			results.push(childNodes[i]);
+		}
+	}
+	return results;
 };
+
+//Need to loop through all of the elements in body and, if they have a class equal to className, add them to results 
