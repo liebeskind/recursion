@@ -5,25 +5,34 @@
 
 // But in stead we're going to implement it from scratch:
 var getElementsByClassName = function (className) {
-	var results = [];
+	
 	var startingNode = document.body;
 
 	var workHorse = function(node) {
-
-		if (node && node.nodeType === 1) {
-			if (node.classList.contains(className)) {
-					alert(node.classList)
-					results.push(node);	
-			}
-		}
+		var results = [];
 		
-		if (node.childNodes){
-			for (var i = 0; i < node.childNodes.length; i++) {
-				workHorse(node.childNodes[i])
+		if (node.nodeType === 1){
+			if (node.classList.contains(className)){
+				results.push(node);
 			}
 		}
 
-		return results;
+		if (node.childNodes){
+			for (var i = 0; i < node.childNodes.length; i++){
+				var theChild = node.childNodes[i];
+				if (theChild.nodeType === 1){
+					if (theChild.classList.contains(className)) {
+						results.push(theChild);
+						if (theChild.childNodes){
+							workHorse(theChild);	
+						}
+					}
+				}
+			}
+		} 
+
+	return results;
+		
 	}
 	
 	workHorse(startingNode)
