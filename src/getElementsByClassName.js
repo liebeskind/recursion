@@ -7,10 +7,9 @@
 var getElementsByClassName = function (className) {
 	
 	var startingNode = document.body;
-
+	var results = [];
+	
 	var workHorse = function(node) {
-		var results = [];
-		
 		if (node.nodeType === 1){
 			if (node.classList.contains(className)){
 				results.push(node);
@@ -19,21 +18,11 @@ var getElementsByClassName = function (className) {
 
 		if (node.childNodes){
 			for (var i = 0; i < node.childNodes.length; i++){
-				var theChild = node.childNodes[i];
-				if (theChild.nodeType === 1){
-					if (theChild.classList.contains(className)) {
-						results.push(theChild);
-						if (theChild.childNodes){
-							workHorse(theChild);	
-						}
-					}
-				}
+				workHorse(node.childNodes[i]);
 			}
 		} 
-
-	return results;
-		
 	}
 	
 	workHorse(startingNode)
+	return results;	
 };
